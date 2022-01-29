@@ -24,23 +24,27 @@ async function getJoke() {
         else
             jokeText = `${data.setup}... ${data.delivery}`; // for two parts joke
 
+        enonceJoke(jokeText)
+
         toggleButton();
     } catch (error) {
         console.log('Something went wrong', error);
     }
 }
 
-// Test function to test Text-to-Speech API
-VoiceRSS.speech({
-    key: ttsApiKey,
-    src: 'Hello, world!',
-    hl: 'en-us',
-    v: 'Linda',
-    r: 0, 
-    c: 'mp3',
-    f: '44khz_16bit_stereo',
-    ssml: false
-});
+// Text-to-Speech function
+function enonceJoke(joke) {
+    VoiceRSS.speech({
+        key: ttsApiKey,
+        src: joke,
+        hl: 'en-us',
+        v: 'Linda',
+        r: 0, 
+        c: 'mp3',
+        f: '44khz_16bit_stereo',
+        ssml: false
+    });
+}
 
 // Event listeners
 button.addEventListener('click', getJoke);
